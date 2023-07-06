@@ -1,81 +1,198 @@
-<!DOCTYPE html>
-<html>
-<!--From https://codepen.io/frytyler/pen/EGdtg-->
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ML API</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #080710;
-        }
-
-        .co {
-            background-color: rgba(255, 255, 255, 0.13);
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-        }
-
-        .co * {
-            font-family: 'Poppins', sans-serif;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-            outline: none;
-            border: none;
-        }
-
-        input {
-            display: block;
-            height: 50px;
-            width: 95%;
-            background-color: rgba(255, 255, 255, 0.07);
-            border-radius: 10px;
-            padding: 0 10px;
-            margin-top: 8px;
-            font-size: 14px;
-            font-weight: 300;
-        }
-
-        ::placeholder {
-            color: #e5e5e5;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="co col-11 col-md-5 mt-4">
-                <center>
-                    <div class="login mt-4">
-                        <h1 class="text-light">Airfoil Prediction</h1>
-                        <form class="p-3" action="{{ url_for('predict')}}" method="post">
-                            <input type="text" name="Frequency" placeholder="Frequency" required="required" /><br>
-                            <input type="text" name="Angle of attack" placeholder="Angle of attack"
-                                required="required" /><br>
-                            <input type="text" name="Chord length" placeholder="Chord length" required="required" /><br>
-                            <input type="text" name="Free-stream velocity" placeholder="Free-stream velocity"
-                                required="required" /><br>
-                            <input type="text" name="Suction side" placeholder="Suction side" required="required" /><br>
-                            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
-                        </form>
-                    </div>
-                    <div class="mt-0 mb-4">
-                        {{prediction_text}}
-                    </div>
-                </center>
-            </div>
-        </div>
-    </div>
-    </div>
-</body>
-
+<!DOCTYPE html>
+
+<html>
+
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+
+
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ML API</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        
+
+        body {
+            background-image: url("https://img.freepik.com/premium-photo/businessman-black-costume-gray-necktie-showing-credit-card-black-wall-payment-banking-concept_34435-4496.jpg?w=900");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-color: #ff0000;
+
+        }
+        
+
+
+        .co {
+
+            background-color: rgba(255, 255, 255, 0);
+
+            border-radius: 20px;
+
+            backdrop-filter: blur(5px);
+
+            border: 2px solid rgb(3, 255, 200);
+
+            box-shadow: 0 0 60px rgba(255, 255, 255, 0.503);
+
+        }
+
+
+
+        .co * {
+
+            font-family: 'Poppins', sans-serif;
+            font-size: large;
+    
+
+            color: #cfd158;
+
+            letter-spacing: 0.5px;
+
+            outline: none;
+
+            border: none;
+
+        }
+
+
+
+        input {
+
+            display: block;
+
+            height: 50px;
+
+            width: 95%;
+
+            background-color: rgba(0, 0, 0, 0.492);
+
+            border-radius: 10px;
+
+            padding: 0 10px;
+
+            margin-top: 8px;
+
+            font-size: 20px;
+
+            font-weight: 300;
+
+        }
+
+        .bgw{
+            background:  rgba(255, 255, 255, 0);
+            font: rgba(0, 72, 255, 0.986);
+            font-size: medium;
+        }
+
+
+        ::placeholder {
+
+            color: #04fae5;
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+    <div class="container-fluid">
+
+        <div class="row justify-content-start">
+
+            <div class="co col-11 col-md-5 mt-4">
+
+                <center>
+
+                    <div class="login mt-4">
+
+                        <h1 style="color: rgb(15, 234, 230)">Credit Card Default Prediction
+                        </h1>
+
+                        <form class="p-3" action="{{ url_for('predict')}}" method="post">
+                            <div class="form-group">
+                                <label for="SEX">Sex:</label>
+                                <select class="bgw" id="SEX" name="SEX">
+                                    <option value="0">Female</option>
+                                    <option value="1">Male</option>
+                                    
+                                </select>
+                            </div>
+
+
+                            <input type="text" name="AGE" placeholder="AGE"
+
+                                required="required" /><br>
+
+                            <input type="text" name="April" placeholder="April" required="required" /><br>
+
+                            <input type="text" name="May" placeholder="May"
+
+                                required="required" /><br>
+
+                            <input type="text" name="June" placeholder="June" required="required" /><br>
+
+                            <input type="text" name="July" placeholder="July" required="required" /><br>
+
+                            <input type="text" name="August" placeholder="August"
+
+                                required="required" /><br>
+
+                            <input type="text" name="September" placeholder="September" required="required" /><br>
+
+                            <input type="text" name="grad_school" placeholder="Grad School"
+
+                                required="required" /><br>
+                                <input type="text" name="high_school" placeholder="High School" required="required" /><br>    
+
+                            <input type="text" name="university" placeholder="University" required="required" /><br>
+                            
+                            <input type="text" name="others" placeholder="Others" required="required" /><br>
+
+                            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+
+                        
+
+                                
+                    </div>
+
+                    <div class="mt-0 mb-4">
+
+                        {{prediction_text}}
+
+                    </div>
+
+                </center>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+</body>
+
+
+
 </html>

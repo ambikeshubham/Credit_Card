@@ -1,4 +1,4 @@
-# Airfoil-Regression-With-Deployment
+# Credit_Card-Regression-With-Deployment
 This is a  project to elaborate how Machine Learning Models are deployed in production using Flask API
 
 Prerequisites
@@ -15,7 +15,7 @@ This project has four major parts :
 app.py - This contains Flask APIs that receive air foil details through GUI or API calls, computes the precited value based on our model and returns it.
 
 
-templates - This folder contains the HTML template to allow user to enter employee detail and displays the predicted air foil regression.
+templates - This folder contains the HTML template to allow user to enter employee detail and displays the predicted Credit Card fraud  regression.
 
 **Running the project**
 
